@@ -70,14 +70,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.title = currentPeriodId.monthName.localizedUppercase
         tableView.tableFooterView = UIView()
 
-//        if let oldArchive = DataManager.getArchive() {
-//            for item in oldArchive {
-//                print(item.itemName)
-//                
-//            }
-//            
-//        }
-        
         incomeTitleLabel.text = NSLocalizedString("incomes_title", comment: "").uppercased()
         outcomeTitleLabel.text = NSLocalizedString("outcomes_title", comment: "").uppercased()
         totalTitleLabel.text = NSLocalizedString("summary_title", comment: "").uppercased()
@@ -145,17 +137,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
 
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-//        if UserDefaults.standard.bool(forKey: "usePIN") && !UserDefaults.standard.bool(forKey: "PINpassed")  {
-//            print("Show PIN access")
-//            performSegue(withIdentifier: "ShowPin", sender: self)
-//        } else {
-//            showScreen()
-//        }
-    }
-    
+        
     // MARK: - Password Delegate method
 
     func showScreen() {
@@ -497,127 +479,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             reloadTableView()
             
         }
-        
-        /*
-        
-          if item.interval == 1 {
-              let editedPaymentDate = item.date
-              let periodOfThisPayment = editedPaymentDate.yearMonths
-
-              if new {
-                /*
-                  var thatPeriodItems = periods[periodIndex(periodId: periodOfThisPayment)].items
-
-                  thatPeriodItems.append(item)
-                  periods[periodIndex(periodId: periodOfThisPayment)].items = thatPeriodItems
-
-              } else {
-                  
-                  
-          //        let oldItems = periods[periodIndex(periodId: currentPeriodId)].items
-                  let oldItems = periods[periodIndex(periodId: periodOfThisPayment)].items
-                  let uuid = item.uuid
-                  let updTitle = item.title
-                  let updValue = item.value
-                  let updDate = item.date
-
-                  let updatedItems = oldItems.map { (existingPayment) -> Payment in
-                      if existingPayment.uuid == uuid {
-                          var newPayment = existingPayment
-                          newPayment.date = updDate
-                          newPayment.value = updValue
-                          newPayment.title = updTitle
-                          return newPayment
-                      }
-                      return existingPayment
-                  }
-                  
-                  periods[periodIndex(periodId: periodOfThisPayment)].items = updatedItems
-                  
-              }
- */
-
-          } else { // Interval = 30
-
-              if new {
-                  var newPayment = item
-                
-//                payments.append(newPayment)
-                
-//                  let dates = datesArray(startDate: item.date)
-    //              print("Dates array count: \(dates.count) last date: \(dates.last?.toShortString)")
-//                  var dateIndex = 0
-//                  for index in startPeriod...endPeriod {
-//                      var updatedItems = periods[index].items
-//                      // Каждая дата должна быть образована из
-//                      newPayment.date = dates[dateIndex]
-//                      updatedItems.append(newPayment)
-//                      periods[index].items = updatedItems
-//                      dateIndex += 1
-//                  }
-                  
-              } else { // Если изменилась запись регулярного платежа
-                /*
-                  if isPartial {
-                      print("period 30 YES partial")
-
-                      let oldItems = periods[startPeriod].items
-                      let uuid = item.uuid
-                      let updTitle = item.title
-                      let updValue = item.value
-                      let updDate = item.date
-                      let updatedItems = oldItems.map { (existingPayment) -> Payment in
-                          if existingPayment.uuid == uuid {
-                              var newPayment = existingPayment
-                              newPayment.date = updDate
-                              newPayment.value = updValue
-                              newPayment.title = updTitle
-                              return newPayment
-                          }
-                          return existingPayment
-                      }
-                      periods[startPeriod].items = updatedItems
-                      
-                  } else {
-                      print("period 30 NO partial")
-                      let dates = datesArray(startDate: item.date)
-                      var dateIndex = 0
-                      
-                      print("start: \(startPeriod) end: \(endPeriod)")
-                      print("dates array: \(dates)")
-                      
-                      for index in startPeriod...endPeriod {
-                          let oldItems = periods[index].items
-                          let uuid = item.uuid
-                          let updTitle = item.title
-                          let updValue = item.value
-                          
-                          let updatedItems = oldItems.map { (existingPayment) -> Payment in
-                              if existingPayment.uuid == uuid {
-                                  var newPayment = existingPayment
-                                  newPayment.date = dates[dateIndex]
-                                  newPayment.value = updValue
-                                  newPayment.title = updTitle
-                                  newPayment.checked = false
-                                  return newPayment
-                              }
-                              return existingPayment
-                          }
-                          periods[index].items = updatedItems
-                          dateIndex += 1
-                      }
-                 */
-                  }
-              }
-          }
-
-          payments.append(item)
-
-          
-          DataManager.savePayments(payments: payments)
-//          loadData()
-        
-        */
         reloadTableView()
       }
       
@@ -741,12 +602,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         showSubMenu()
     }
-
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
-//        }
-//    }
     
     private func showSubMenu() {
         let menuTitle = shownPayments[currentRow].title
@@ -835,7 +690,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             let navController = segue.destination as! UINavigationController
             let pinController = navController.topViewController as! PinViewController
             pinController.newPin = false
-            //           screenIsHided = true
         }
     }
 
